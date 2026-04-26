@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% comment %}
+clubs.html — 社團列表頁
+使用到：extends, block, for, empty, if, forloop.counter, forloop.first,
+        list|length, text|title, variable, comment
+資料來自 ClubsView.get_context_data()，不在 template 中硬寫。
+{% endcomment %}
+
+{% block content %}
+<div class="card">
+    <h2>Club Directory</h2>
+    <p class="tag">Total clubs listed: {{ clubs|length }}</p>
+</div>
+
+<div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:14px;">
+{% for club in clubs %}
+<div class="card" style="margin-bottom:0;">
+
+    {# 社團名稱套用 title filter #}
+    <h3>{{ club.name|title }}</h3>
+    <p class="tag">Advisor: {{ club.advisor }}</p>
+    <p class="tag">Recent activity count: {{ club.recent_activities|length }}</p>
+
+    <p style="margin-top:10px; font-size:0.85em; font-weight:600; color:#555;">Officers</p>
+    <ol style="padding-left:18px; margin:4px 0 10px;">
+    {% for officer in club.officers %}
+        <li>
+            {{ forloop.counter }}. {{ officer.name }}
+            {# 第一位幹部標記 team contact #}
+            {% if forloop.first %}
+                <span class="badge">(team contact)</span>
+            {% endif %}
+            — <span class="tag">{{ officer.role }}</span>
+        </li>
+    {% empty %}
+        <li style="color:#aaa;">No officers listed.</li>
+    {% endfor %}
+    </ol>
+
+    <p style="font-size:0.85em; font-weight:600; color:#555;">Recent activities</p>
+    <ul style="margin:4px 0;">
+    {% for activity in club.recent_activities %}
+        <li>{{ activity }}</li>
+    {% empty %}
+        <li style="color:#aaa;">No recent activities.</li>
+    {% endfor %}
+    </ul>
+
+</div>
+{% empty %}
+<p style="color:#aaa;">No clubs available.</p>
+{% endfor %}
+</div>
+{% endblock %}

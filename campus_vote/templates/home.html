@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>所有投票題目</h2>
+    <ul>
+    {% for question in questions %}
+        <li style="margin-bottom:16px;">
+            <strong>
+                {{ forloop.counter }}.
+                <a href="{% url 'polls:question_detail' question.pk %}">{{ question.title }}</a>
+            </strong>
+            {% if question.is_open %}
+                <span class="badge">開放中</span>
+            {% else %}
+                <span class="badge badge-closed">已關閉</span>
+            {% endif %}
+            <br>
+            <span class="tag">發布時間：{{ question.pub_date }}</span><br>
+            <span style="font-size:0.9em; color:#555;">{{ question.description }}</span>
+
+            {# 巢狀 for：顯示該題所有選項 #}
+            <ul style="margin-top:6px;">
+            {% for choice in question.choice_set.all %}
+                <li>{{ forloop.counter }}. {{ choice.choice_text }}：{{ choice.votes }} 票</li>
+            {% empty %}
+                <li style="color:#aaa;">目前沒有選項。</li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% empty %}
+        <li style="color:#aaa;">目前沒有任何投票題目。</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

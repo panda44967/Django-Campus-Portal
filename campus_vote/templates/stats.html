@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>統計頁</h2>
+    <p>問題總數：{{ total_questions }}</p>
+    <p>選項總數：{{ total_choices }}</p>
+    <p>開放中的問題數：{{ open_questions }}</p>
+</div>
+
+{% for item in questions_with_stats %}
+<div class="card">
+    <h3>{{ item.question.title }}</h3>
+    <p class="tag">
+        最高票：
+        {% if item.top_choice %}
+            {{ item.top_choice.choice_text }}（{{ item.top_choice.votes }} 票）
+        {% else %}
+            尚未建立選項
+        {% endif %}
+    </p>
+    <ol style="margin-top:8px;">
+    {% for choice in item.choices %}
+        <li>{{ choice.choice_text }}：{{ choice.votes }} 票</li>
+    {% empty %}
+        <li style="color:#aaa;">尚未建立選項。</li>
+    {% endfor %}
+    </ol>
+</div>
+{% empty %}
+<div class="card">
+    <p style="color:#aaa;">目前沒有任何題目。</p>
+</div>
+{% endfor %}
+{% endblock %}

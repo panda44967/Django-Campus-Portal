@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>投票題目詳細頁</h2>
+    <h3>{{ question.title }}</h3>
+    <p class="tag">發布時間：{{ question.pub_date }}</p>
+    <p style="margin: 8px 0; font-size:0.95em; color:#444;">{{ question.description }}</p>
+    <p>
+        狀態：
+        {% if question.is_open %}
+            <span class="badge">開放中</span>
+        {% else %}
+            <span class="badge badge-closed">已關閉</span>
+        {% endif %}
+    </p>
+
+    <h3 style="margin-top:16px;">選項列表</h3>
+    <ol>
+    {% for choice in choices %}
+        <li>
+            {{ choice.choice_text }}
+            <span class="tag">— {{ choice.votes }} 票</span>
+        </li>
+    {% empty %}
+        <li style="color:#aaa;">目前沒有選項。</li>
+    {% endfor %}
+    </ol>
+
+    <p style="margin-top:16px;">
+        <a href="{% url 'polls:home' %}">← 返回首頁</a>
+    </p>
+</div>
+{% endblock %}

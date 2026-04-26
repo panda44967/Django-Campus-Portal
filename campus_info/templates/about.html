@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>{{ title }}</h2>
+    <p style="color:#666; margin-top:6px;">{{ description }}</p>
+</div>
+
+<div class="card">
+    <h3>Implementation Checklist</h3>
+    <ul style="margin-top:10px;">
+    {% for item in checklist %}
+        <li>{{ item }}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}

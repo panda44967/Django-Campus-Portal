@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <h2>Weekly Schedule</h2>
+    <p class="tag">Days covered this week: {{ schedule|length }}</p>
+</div>
+
+{# ── 3 層巢狀 for：日 → 時段 → 活動 ── #}
+{% for day in schedule %}
+<div class="card">
+    <h3>Day {{ forloop.counter }}: {{ day.day }}</h3>
+
+    {% for period in day.periods %}
+    <div style="margin-left:14px; margin-top:8px;">
+        <p style="font-weight:600; font-size:0.9em; color:#555;">
+            ▸ {{ period.name }}
+            {% if forloop.last %}<span class="tag">（最後時段）</span>{% endif %}
+        </p>
+        <ul style="margin-left:10px;">
+        {% for activity in period.activities %}
+            <li>
+                {{ activity.name }} at {{ activity.location }}
+                {% if activity.online %}
+                    <span class="badge badge-online">online-friendly</span>
+                {% else %}
+                    <span class="badge">on-campus</span>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li style="color:#aaa;">No activities placed.</li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+
+</div>
+{% endfor %}
+{% endblock %}
