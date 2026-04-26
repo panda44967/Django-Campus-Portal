@@ -2,14 +2,14 @@
 
 This repository contains a backend web prototype designed to manage campus information and interactive voting events. It is structured into two independent Django modules to demonstrate different architectural patterns and data management strategies.
 
-## 🛠️ Tech Stack
+## Tech Stack
 - **Backend:** Python 3.x, Django 5.0.0
 - **Database:** SQLite (Django ORM)
 - **Architecture:** MVT (Model-View-Template), Function-Based & Class-Based Views
 
 ---
 
-## 📂 System Modules
+## System Modules
 
 ### Module 1: Campus Info Dashboard (`campus_info`)
 A content-delivery module focused on dynamic template rendering and context management without relying on custom database models.
@@ -31,7 +31,7 @@ A data-driven interactive module designed to manage voting events, built with re
 
 ---
 
-## 🚀 Quick Start / Setup
+## Quick Start / Setup
 
 To run this project locally, follow these steps:
 
