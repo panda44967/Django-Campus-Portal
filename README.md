@@ -35,7 +35,7 @@ A data-driven interactive module designed to manage voting events, built with re
 
 To run this project locally, follow these steps:
 
-**1. Clone the repository and set up the environment:**
+** Clone the repository and set up the environment:**
 ```bash
 # Create and activate virtual environment
 python -m venv venv
@@ -44,12 +44,12 @@ source venv/Scripts/activate  # For Windows users
 # Install dependencies
 pip install django==5.0.0
 
-2. Run Module 1 (Information Dashboard):
+Run Module 1 (Information Dashboard):
 cd campus_info
 python manage.py runserver 8000
 # Access at: [http://127.0.0.1:8000/home/](http://127.0.0.1:8000/home/)
 
-3. Run Module 2 (Voting System):
+Run Module 2 (Voting System):
 cd ../campus_vote
 python manage.py runserver 8001
 # Access at: [http://127.0.0.1:8001/](http://127.0.0.1:8001/)
